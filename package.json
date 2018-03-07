@@ -1,6 +1,6 @@
 {
   "name": "ng5-files",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Angular5 files upload by click or/and drag and drop",
   "keywords": [
     "Angular5",
@@ -52,7 +52,7 @@
     "@types/jasmine": "~2.5.53",
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
-    "codelyzer": "~3.1.1",
+    "codelyzer": "^4.0.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "jasmine-ts": "^0.2.1",
@@ -65,8 +65,8 @@
     "ng-packagr": "^1.6.0",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
-    "tslint": "~5.3.2",
-    "typescript": "^2.3.3"
+    "tslint": "~5.7.0",
+    "typescript": "~2.4.2"
   },
   "bugs": {
     "url": "https://github.com/paulgligor/ng5-files/issues"
