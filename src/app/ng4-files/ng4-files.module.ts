@@ -24,6 +24,6 @@ import {
     Ng4FilesUtilsService
   ]
 })
-export class Ng4FilesModule {
+export class Ng5FilesModule {
   // todo: except exports Ng4FilesUtilsService
 }

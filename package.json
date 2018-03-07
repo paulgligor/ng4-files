@@ -1,23 +1,20 @@
 {
-  "name": "angular4-files-upload",
-  "version": "1.0.2",
-  "description": "Angular4 files upload by click or/and drag and drop",
+  "name": "ng5-files",
+  "version": "1.0.4",
+  "description": "Angular5 files upload by click or/and drag and drop",
   "keywords": [
-    "Angular4",
-    "ng4",
+    "Angular5",
+    "ng5",
     "file",
     "file upload",
     "drop file",
     "drag and drop upload",
     "angular upload"
   ],
-  "author": {
-    "name": "Potsepaiev Illia",
-    "email": "bonjurmrfirst@gmail.com"
-  },
+  "author": "Paul Gligor <paul.gligor@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bonjurmrfirst/ng4-files/"
+    "url": "git+https://github.com/paulgligor/ng5-files.git"
   },
   "license": "MIT",
   "scripts": {
@@ -70,5 +67,10 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.3.2",
     "typescript": "^2.3.3"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/paulgligor/ng5-files/issues"
+  },
+  "homepage": "https://github.com/paulgligor/ng5-files#readme",
+  "main": "karma.conf.js"
 }
