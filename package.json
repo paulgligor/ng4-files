@@ -1,6 +1,6 @@
 {
   "name": "ng5-files",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Angular5 files upload by click or/and drag and drop",
   "keywords": [
     "Angular5",
@@ -66,7 +66,7 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.3.3"
   },
   "bugs": {
     "url": "https://github.com/paulgligor/ng5-files/issues"
