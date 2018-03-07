@@ -10,21 +10,21 @@ import {
 } from '@angular/core';
 
 import {
-    Ng4FilesUtilsService
+    Ng5FilesUtilsService
 } from '../../services';
 
-import { Ng4FilesSelected } from '../../declarations';
+import { Ng5FilesSelected } from '../../declarations';
 
 @Component({
-    selector: 'ng4-files-drop', // tslint:disable-line
-    templateUrl: './ng4-files-drop.component.html',
+    selector: 'ng5-files-drop', // tslint:disable-line
+    templateUrl: './ng5-files-drop.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Ng4FilesDropComponent implements DoCheck {
+export class Ng5FilesDropComponent implements DoCheck {
 
     @Input() private configId = 'shared';
 
-    @Output() filesSelect: EventEmitter<Ng4FilesSelected> = new EventEmitter<Ng4FilesSelected>();
+    @Output() filesSelect: EventEmitter<Ng5FilesSelected> = new EventEmitter<Ng5FilesSelected>();
 
     @HostListener('dragenter', ['$event'])
     public onDragEnter(event: any) {
@@ -48,7 +48,7 @@ export class Ng4FilesDropComponent implements DoCheck {
     }
 
     constructor(private changeDetector: ChangeDetectorRef,
-                private ng4FilesUtilsService: Ng4FilesUtilsService) {
+                private ng5FilesUtilsService: Ng5FilesUtilsService) {
     }
 
     ngDoCheck() {
@@ -57,7 +57,7 @@ export class Ng4FilesDropComponent implements DoCheck {
 
     private dropFilesHandler(files: FileList) {
         this.filesSelect.emit(
-            this.ng4FilesUtilsService.verifyFiles(files, this.configId)
+            this.ng5FilesUtilsService.verifyFiles(files, this.configId)
         );
     }
 

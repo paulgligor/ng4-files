@@ -1,11 +1,11 @@
-import { Ng4FilesDropComponent } from './ng4-files-drop.component';
+import { Ng5FilesDropComponent } from './ng5-files-drop.component';
 
-describe('Ng4FilesDropComponent', () => {
+describe('Ng5FilesDropComponent', () => {
 
-    let sut: Ng4FilesDropComponent, mockChangeDetector, mockNg4FilesUtilsService, mockEvent;
+    let sut: Ng5FilesDropComponent, mockChangeDetector, mockNg5FilesUtilsService, mockEvent;
 
     beforeEach(() => {
-        mockNg4FilesUtilsService = {
+        mockNg5FilesUtilsService = {
             verifyFiles: jasmine.createSpy('verifyFiles')
                 .and.returnValue('VERIFIED')
         };
@@ -19,7 +19,7 @@ describe('Ng4FilesDropComponent', () => {
             preventDefault: jasmine.createSpy('preventDefault')
         };
 
-        sut = new Ng4FilesDropComponent(mockChangeDetector, mockNg4FilesUtilsService);
+        sut = new Ng5FilesDropComponent(mockChangeDetector, mockNg5FilesUtilsService);
     });
 
     it('should set default configId value', () => {

@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 
 import {
-    Ng4FilesConfig,
-    ng4FilesConfigDefault
+    Ng5FilesConfig,
+    ng5FilesConfigDefault
 } from '../declarations';
 
 @Injectable()
-export class Ng4FilesService {
+export class Ng5FilesService {
 
-    private static readonly ERROR_MSG_PREFIX = 'ng4Files:';
+    private static readonly ERROR_MSG_PREFIX = 'ng5Files:';
 
-    private configs: { [key: string]: Ng4FilesConfig } = {};
+    private configs: { [key: string]: Ng5FilesConfig } = {};
 
     private static throwError(
         msg: string,
         type: 'default' | 'range' | 'syntax' | 'reference' = 'default'
     ): never {
-        const fullMsg = `${Ng4FilesService.ERROR_MSG_PREFIX} ${msg}`;
+        const fullMsg = `${Ng5FilesService.ERROR_MSG_PREFIX} ${msg}`;
 
         switch (type) {
             case 'default':
@@ -30,19 +30,19 @@ export class Ng4FilesService {
         }
     }
 
-    public addConfig(config: Ng4FilesConfig, configId = 'shared'): void {
+    public addConfig(config: Ng5FilesConfig, configId = 'shared'): void {
         this.newConfigVerifyPipeline(config);
         this.configs[configId] = config;
     }
 
-    public getConfig(configId = 'shared'): Ng4FilesConfig {
+    public getConfig(configId = 'shared'): Ng5FilesConfig {
         if (configId === 'shared' && !this.configs['shared']) {
-            this.configs['shared'] = <Ng4FilesConfig>{};
+            this.configs['shared'] = <Ng5FilesConfig>{};
             this.setDefaultProperties(this.configs['shared']);
         }
 
         if (!this.configs[configId]) {
-            Ng4FilesService.throwError(`Config '${configId}' is not found`, 'reference');
+            Ng5FilesService.throwError(`Config '${configId}' is not found`, 'reference');
         }
 
         return this.configs[configId];
@@ -57,54 +57,54 @@ export class Ng4FilesService {
             .transformAcceptExtensions(config);
     }
 
-    private isUnique(config): Ng4FilesService {
+    private isUnique(config): Ng5FilesService {
         const isConfigExist = Object.keys(this.configs).find((key: string) => this.configs[key] === config);
         if (isConfigExist) {
-            Ng4FilesService.throwError('Avoid add the same config more than once');
+            Ng5FilesService.throwError('Avoid add the same config more than once');
         }
 
         return this;
     }
 
-    private setDefaultProperties(config: Ng4FilesConfig): Ng4FilesService {
-        config.acceptExtensions = config.acceptExtensions || ng4FilesConfigDefault.acceptExtensions;
-        config.maxFileSize = config.maxFileSize || ng4FilesConfigDefault.maxFileSize;
-        config.totalFilesSize = config.totalFilesSize || ng4FilesConfigDefault.totalFilesSize;
+    private setDefaultProperties(config: Ng5FilesConfig): Ng5FilesService {
+        config.acceptExtensions = config.acceptExtensions || ng5FilesConfigDefault.acceptExtensions;
+        config.maxFileSize = config.maxFileSize || ng5FilesConfigDefault.maxFileSize;
+        config.totalFilesSize = config.totalFilesSize || ng5FilesConfigDefault.totalFilesSize;
         config.maxFilesCount = config.maxFilesCount === 0 ?
             config.maxFilesCount :
-            config.maxFilesCount || ng4FilesConfigDefault.maxFilesCount;
+            config.maxFilesCount || ng5FilesConfigDefault.maxFilesCount;
 
         return this;
     }
 
-    private isFilesCountValid(config): Ng4FilesService {
+    private isFilesCountValid(config): Ng5FilesService {
         if (config.maxFilesCount < 1) {
             const FILES_COUNT_MIN = 1;
             const FILES_COUNT_MAX = Infinity;
 
-            Ng4FilesService.throwError(`maxFilesCount must be between ${FILES_COUNT_MIN} and ${FILES_COUNT_MAX}`, 'range');
+            Ng5FilesService.throwError(`maxFilesCount must be between ${FILES_COUNT_MIN} and ${FILES_COUNT_MAX}`, 'range');
         }
 
         return this;
     }
 
-    private isAcceptExtensionsValid(config): Ng4FilesService {
+    private isAcceptExtensionsValid(config): Ng5FilesService {
         if (typeof config.acceptExtensions === 'string' && config.acceptExtensions !== '*') {
-            Ng4FilesService.throwError(`acceptanceExtensions type must be "*" or string[]`, 'syntax');
+            Ng5FilesService.throwError(`acceptanceExtensions type must be "*" or string[]`, 'syntax');
         }
 
         return this;
     }
 
-    private isFileSizeRangesValid(config): Ng4FilesService {
+    private isFileSizeRangesValid(config): Ng5FilesService {
         if (config.maxFileSize > config.totalFilesSize) {
-            Ng4FilesService.throwError('maxFileSize must be less than totalFilesSize', 'range');
+            Ng5FilesService.throwError('maxFileSize must be less than totalFilesSize', 'range');
         }
 
         return this;
     }
 
-    private transformAcceptExtensions(config): Ng4FilesService {
+    private transformAcceptExtensions(config): Ng5FilesService {
         if (
             config.acceptExtensions === '*' ||
             config.acceptExtensions.indexOf('*') !== -1 ||

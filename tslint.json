@@ -117,13 +117,13 @@
     "directive-selector": [
       false,
       "attribute",
-      "ng4Files",
+      "ng5Files",
       "camelCase"
     ],
     "component-selector": [
       false,
       "element",
-      "ng4Files",
+      "ng5Files",
       "kebab-case"
     ],
     "use-input-property-decorator": true,

@@ -10,31 +10,31 @@ import {
 } from '@angular/core';
 
 import {
-  Ng4FilesService,
-  Ng4FilesUtilsService
+  Ng5FilesService,
+  Ng5FilesUtilsService
 } from '../../services';
 
-import { Ng4FilesSelected } from '../../declarations/ng4-files-selected';
+import { Ng5FilesSelected } from '../../declarations/ng5-files-selected';
 
 @Component({
-    selector: 'ng4-files-click', // tslint:disable-line
-    templateUrl: './ng4-files-click.component.html',
-    styles: ['.ng4-files-upload-btn { display: none; }'],
+    selector: 'ng5-files-click', // tslint:disable-line
+    templateUrl: './ng5-files-click.component.html',
+    styles: ['.ng5-files-upload-btn { display: none; }'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Ng4FilesClickComponent implements OnInit, DoCheck {
+export class Ng5FilesClickComponent implements OnInit, DoCheck {
 
   @Input() configId = 'shared';
 
-  @Output() filesSelect: EventEmitter<Ng4FilesSelected> = new EventEmitter<Ng4FilesSelected>();
+  @Output() filesSelect: EventEmitter<Ng5FilesSelected> = new EventEmitter<Ng5FilesSelected>();
 
   public maxFilesCount: number;
   public acceptExtensions: string;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
-    private ng4FilesService: Ng4FilesService,
-    private ng4FilesUtilsService: Ng4FilesUtilsService
+    private ng5FilesService: Ng5FilesService,
+    private ng5FilesUtilsService: Ng5FilesUtilsService
   ) {}
 
   ngDoCheck() {
@@ -42,7 +42,7 @@ export class Ng4FilesClickComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    const config = this.ng4FilesService.getConfig(this.configId);
+    const config = this.ng5FilesService.getConfig(this.configId);
 
     this.maxFilesCount = config.maxFilesCount;
     this.acceptExtensions = <string>config.acceptExtensions;
@@ -52,9 +52,9 @@ export class Ng4FilesClickComponent implements OnInit, DoCheck {
     if (!files.length) {
         return;
     }
-    
+
     this.filesSelect.emit(
-      this.ng4FilesUtilsService.verifyFiles(files, this.configId)
+      this.ng5FilesUtilsService.verifyFiles(files, this.configId)
     );
   }
 

@@ -1,13 +1,13 @@
-import { Ng4FilesUtilsService } from './ng4-files-utils.service';
+import { Ng5FilesUtilsService } from './ng5-files-utils.service';
 
 import {
-    Ng4FilesStatus,
-    Ng4FilesConfig
+    Ng5FilesStatus,
+    Ng5FilesConfig
 } from '../declarations';
 
-describe('Ng4FilesUtilsService', () => {
+describe('Ng5FilesUtilsService', () => {
 
-    let sut: Ng4FilesUtilsService, mockNg4FilesService, mockFiles;
+    let sut: Ng5FilesUtilsService, mockNg5FilesService, mockFiles;
 
     beforeEach(() => {
         mockFiles = [
@@ -16,25 +16,25 @@ describe('Ng4FilesUtilsService', () => {
             { name: '.gitignore' }
         ];
 
-        const mockConfig: Ng4FilesConfig = {
+        const mockConfig: Ng5FilesConfig = {
             maxFilesCount: 5,
             maxFileSize: 1111,
             totalFilesSize: 2222,
             acceptExtensions: 'py, py.tpl, gitignore'
         };
 
-        mockNg4FilesService = {
+        mockNg5FilesService = {
             getConfig: jasmine.createSpy('getConfig')
                 .and.returnValue(mockConfig)
         };
 
-        sut = new Ng4FilesUtilsService(mockNg4FilesService);
+        sut = new Ng5FilesUtilsService(mockNg5FilesService);
     });
 
     describe('getRegExp', () => {
 
         it('should return proper regExp', () => {
-            const result = (Ng4FilesUtilsService as any).getRegExp('MOCK-EXTENSION');
+            const result = (Ng5FilesUtilsService as any).getRegExp('MOCK-EXTENSION');
 
             expect(result).toEqual(/(.*?).(MOCK-EXTENSION)$/);
         });
@@ -46,13 +46,13 @@ describe('Ng4FilesUtilsService', () => {
         it('should get default config if configId is not present', () => {
             sut.verifyFiles(mockFiles);
 
-            expect(mockNg4FilesService.getConfig).toHaveBeenCalledWith('shared');
+            expect(mockNg5FilesService.getConfig).toHaveBeenCalledWith('shared');
         });
 
         it('should get proper config by id', () => {
             sut.verifyFiles(mockFiles, 'MOCK-CONFIG-ID');
 
-            expect(mockNg4FilesService.getConfig).toHaveBeenCalledWith('MOCK-CONFIG-ID');
+            expect(mockNg5FilesService.getConfig).toHaveBeenCalledWith('MOCK-CONFIG-ID');
         });
 
         it('should return proper status if attached files count > maxFilesCount', () => {
@@ -61,7 +61,7 @@ describe('Ng4FilesUtilsService', () => {
             const result = sut.verifyFiles(mockFiles);
 
             expect(result).toEqual({
-                status: Ng4FilesStatus.STATUS_MAX_FILES_COUNT_EXCEED,
+                status: Ng5FilesStatus.STATUS_MAX_FILES_COUNT_EXCEED,
                 files: jasmine.objectContaining([...mockFiles])
             });
         });
@@ -72,7 +72,7 @@ describe('Ng4FilesUtilsService', () => {
             const result = sut.verifyFiles(mockFiles);
 
             expect(result).toEqual({
-                status: Ng4FilesStatus.STATUS_MAX_FILE_SIZE_EXCEED,
+                status: Ng5FilesStatus.STATUS_MAX_FILE_SIZE_EXCEED,
                 files: jasmine.objectContaining([{
                     name: 'name.py',
                     size: 2222
@@ -88,7 +88,7 @@ describe('Ng4FilesUtilsService', () => {
             const result = sut.verifyFiles(mockFiles);
 
             expect(result).toEqual({
-                status: Ng4FilesStatus.STATUS_MAX_FILES_TOTAL_SIZE_EXCEED,
+                status: Ng5FilesStatus.STATUS_MAX_FILES_TOTAL_SIZE_EXCEED,
                 files: jasmine.objectContaining(mockFiles)
             });
         });
@@ -101,7 +101,7 @@ describe('Ng4FilesUtilsService', () => {
             const result = sut.verifyFiles(mockFiles);
 
             expect(result).toEqual({
-                status: Ng4FilesStatus.STATUS_NOT_MATCH_EXTENSIONS,
+                status: Ng5FilesStatus.STATUS_NOT_MATCH_EXTENSIONS,
                 files: jasmine.objectContaining([{
                     name: 'invalid-file.exe'
                 }])
@@ -112,7 +112,7 @@ describe('Ng4FilesUtilsService', () => {
             const result = sut.verifyFiles(mockFiles);
 
             expect(result).toEqual({
-                status: Ng4FilesStatus.STATUS_SUCCESS,
+                status: Ng5FilesStatus.STATUS_SUCCESS,
                 files: jasmine.objectContaining(mockFiles)
             });
         });

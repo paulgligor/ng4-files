@@ -1,13 +1,13 @@
-import { Ng4FilesClickComponent } from './ng4-files-click.component';
+import { Ng5FilesClickComponent } from './ng5-files-click.component';
 
-describe('Ng4FilesClickComponent', () => {
+describe('Ng5FilesClickComponent', () => {
 
-    let sut: Ng4FilesClickComponent,
+    let sut: Ng5FilesClickComponent,
         mockChangeDetector,
-        mockNg4FilesService,
-        mockNg4FilesUtilsService;
+        mockNg5FilesService,
+        mockNg5FilesUtilsService;
 
-    mockNg4FilesService = {
+    mockNg5FilesService = {
         getConfig: jasmine.createSpy('getConfig').and.returnValue({
             maxFilesCount: 1111,
             acceptExtensions: 'MOCK-EXTENSIONS'
@@ -18,16 +18,16 @@ describe('Ng4FilesClickComponent', () => {
         detectChanges: jasmine.createSpy('detectChanges')
     };
 
-    mockNg4FilesUtilsService = {
+    mockNg5FilesUtilsService = {
         verifyFiles: jasmine.createSpy('verifyFiles')
             .and.returnValue('MOCK-VERIFIED-FILES-LIST')
     };
 
     beforeEach(() => {
-        sut = new Ng4FilesClickComponent(
+        sut = new Ng5FilesClickComponent(
             mockChangeDetector,
-            mockNg4FilesService,
-            mockNg4FilesUtilsService
+            mockNg5FilesService,
+            mockNg5FilesUtilsService
         );
     });
 

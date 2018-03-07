@@ -1,11 +1,11 @@
-export interface Ng4FilesConfig {
+export interface Ng5FilesConfig {
   acceptExtensions?: string[] | string;
   maxFilesCount?: number;
   maxFileSize?: number;
   totalFilesSize?: number;
 }
 
-export const ng4FilesConfigDefault: Ng4FilesConfig = {
+export const ng5FilesConfigDefault: Ng5FilesConfig = {
   acceptExtensions: '*',
   maxFilesCount: Infinity,
   maxFileSize: Infinity,

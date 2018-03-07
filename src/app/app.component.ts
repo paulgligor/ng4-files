@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
 import {
-  Ng4FilesService,
-  Ng4FilesConfig,
-  Ng4FilesStatus,
-  Ng4FilesSelected
-} from './ng4-files';
+  Ng5FilesService,
+  Ng5FilesConfig,
+  Ng5FilesStatus,
+  Ng5FilesSelected
+} from './ng5-files';
 
 @Component({
     selector: 'app-root',
@@ -15,12 +15,12 @@ export class AppComponent implements OnInit {
 
   public selectedFiles;
 
-  private sharedConfig: Ng4FilesConfig = {
+  private sharedConfig: Ng5FilesConfig = {
     acceptExtensions: ['jpg'],
     maxFilesCount: 5
   };
 
-  private namedConfig: Ng4FilesConfig = {
+  private namedConfig: Ng5FilesConfig = {
     acceptExtensions: ['js', 'doc', 'mp4'],
     maxFilesCount: 5,
     maxFileSize: 512000,
@@ -28,16 +28,16 @@ export class AppComponent implements OnInit {
   };
 
   constructor(
-      private ng4FilesService: Ng4FilesService
+      private ng5FilesService: Ng5FilesService
   ) {}
 
   ngOnInit() {
-    this.ng4FilesService.addConfig(this.sharedConfig);
-    this.ng4FilesService.addConfig(this.namedConfig, 'another-config');
+    this.ng5FilesService.addConfig(this.sharedConfig);
+    this.ng5FilesService.addConfig(this.namedConfig, 'another-config');
   }
 
-  public filesSelect(selectedFiles: Ng4FilesSelected): void {
-    if (selectedFiles.status !== Ng4FilesStatus.STATUS_SUCCESS) {
+  public filesSelect(selectedFiles: Ng5FilesSelected): void {
+    if (selectedFiles.status !== Ng5FilesStatus.STATUS_SUCCESS) {
       this.selectedFiles = selectedFiles.status;
       return;
     }

@@ -1,16 +1,16 @@
-import { Ng4FilesService } from './ng4-files.service';
+import { Ng5FilesService } from './ng5-files.service';
 import {
-    Ng4FilesConfig,
-    ng4FilesConfigDefault
+    Ng5FilesConfig,
+    ng5FilesConfigDefault
 } from '../declarations';
 
-describe('Ng4FilesService', () => {
+describe('Ng5FilesService', () => {
 
-    let sut: Ng4FilesService,
-        mockConfig: Ng4FilesConfig;
+    let sut: Ng5FilesService,
+        mockConfig: Ng5FilesConfig;
 
     beforeEach(() => {
-        sut = new Ng4FilesService();
+        sut = new Ng5FilesService();
 
         mockConfig = {
             acceptExtensions: ['py', 'py.tpl', 'gitignore'],
@@ -23,29 +23,29 @@ describe('Ng4FilesService', () => {
     describe('throwError', () => {
 
         it('should add prefix to error msg', () => {
-            const expectedResult = new Error(`${(Ng4FilesService as any).ERROR_MSG_PREFIX} MOCK-MSG`);
+            const expectedResult = new Error(`${(Ng5FilesService as any).ERROR_MSG_PREFIX} MOCK-MSG`);
 
-            expect(() => (Ng4FilesService as any).throwError('MOCK-MSG'))
+            expect(() => (Ng5FilesService as any).throwError('MOCK-MSG'))
                 .toThrow(expectedResult);
         });
 
         it('should throw Error by default', () => {
-            expect(() => (Ng4FilesService as any).throwError('MOCK-MSG'))
+            expect(() => (Ng5FilesService as any).throwError('MOCK-MSG'))
                 .toThrowError(Error);
         });
 
         it('should throw RangeError', () => {
-            expect(() => (Ng4FilesService as any).throwError('MOCK-MSG', 'range'))
+            expect(() => (Ng5FilesService as any).throwError('MOCK-MSG', 'range'))
                 .toThrowError(RangeError);
         });
 
         it('should throw SyntaxError', () => {
-            expect(() => (Ng4FilesService as any).throwError('MOCK-MSG', 'syntax'))
+            expect(() => (Ng5FilesService as any).throwError('MOCK-MSG', 'syntax'))
                 .toThrowError(SyntaxError);
         });
 
         it('should throw ReferenceError', () => {
-            expect(() => (Ng4FilesService as any).throwError('MOCK-MSG', 'reference'))
+            expect(() => (Ng5FilesService as any).throwError('MOCK-MSG', 'reference'))
                 .toThrowError(ReferenceError);
         });
 
@@ -90,11 +90,11 @@ describe('Ng4FilesService', () => {
         });
 
         it('should create shared config if there is no configs', () => {
-            expect(sut.getConfig()).toEqual(ng4FilesConfigDefault);
+            expect(sut.getConfig()).toEqual(ng5FilesConfigDefault);
         });
 
         it('should throw if there is no configs with passed id', () => {
-            const spy = spyOn((Ng4FilesService as any), 'throwError');
+            const spy = spyOn((Ng5FilesService as any), 'throwError');
             const expectedResultMsg = 'Config \'INVALID-ID\' is not found';
 
             sut.getConfig('INVALID-ID');
@@ -105,7 +105,7 @@ describe('Ng4FilesService', () => {
         describe('isUnique', () => {
 
             it('should throw if config added twice', () => {
-                const spy = spyOn((Ng4FilesService as any), 'throwError');
+                const spy = spyOn((Ng5FilesService as any), 'throwError');
                 const expectedResultMsg = 'Avoid add the same config more than once';
 
                 (sut as any).configs['MOCK-CONFIG-ID'] = mockConfig;
@@ -119,16 +119,16 @@ describe('Ng4FilesService', () => {
         describe('isFilesCountValid', () => {
 
             it('should throw if maxFilesCount less than 1', () => {
-                const spy = spyOn((Ng4FilesService as any), 'throwError');
+                const spy = spyOn((Ng5FilesService as any), 'throwError');
                 const expectedResultMsg = 'maxFilesCount must be between 1 and Infinity';
 
-                (sut as any).isFilesCountValid(<Ng4FilesConfig>{maxFilesCount: 0});
+                (sut as any).isFilesCountValid(<Ng5FilesConfig>{maxFilesCount: 0});
 
                 expect(spy).toHaveBeenCalledWith(expectedResultMsg, 'range');
             });
 
             it('should return this', () => {
-                const reulst = (sut as any).isFilesCountValid(<Ng4FilesConfig>{maxFilesCount: 1});
+                const reulst = (sut as any).isFilesCountValid(<Ng5FilesConfig>{maxFilesCount: 1});
 
                 expect(reulst).toBe(sut);
             });
@@ -138,16 +138,16 @@ describe('Ng4FilesService', () => {
         describe('isAcceptExtensionsValid', () => {
 
             it('should throw if acceptExtensions is string and not equal "*"', () => {
-                const spy = spyOn((Ng4FilesService as any), 'throwError');
+                const spy = spyOn((Ng5FilesService as any), 'throwError');
                 const expectedResultMsg = 'acceptanceExtensions type must be "*" or string[]';
 
-                (sut as any).isAcceptExtensionsValid(<Ng4FilesConfig>{acceptExtensions: 'INVALID-SELECTOR'});
+                (sut as any).isAcceptExtensionsValid(<Ng5FilesConfig>{acceptExtensions: 'INVALID-SELECTOR'});
 
                 expect(spy).toHaveBeenCalledWith(expectedResultMsg, 'syntax');
             });
 
             it('should return this', () => {
-                const reulst = (sut as any).isAcceptExtensionsValid(<Ng4FilesConfig>{acceptExtensions: '*'});
+                const reulst = (sut as any).isAcceptExtensionsValid(<Ng5FilesConfig>{acceptExtensions: '*'});
 
                 expect(reulst).toBe(sut);
             });
@@ -157,10 +157,10 @@ describe('Ng4FilesService', () => {
         describe('isFileSizeRangesValid', () => {
 
             it('should throw if maxFileSize less than totalFilesSize', () => {
-                const spy = spyOn((Ng4FilesService as any), 'throwError');
+                const spy = spyOn((Ng5FilesService as any), 'throwError');
                 const expectedResultMsg = 'maxFileSize must be less than totalFilesSize';
 
-                (sut as any).isFileSizeRangesValid(<Ng4FilesConfig>{
+                (sut as any).isFileSizeRangesValid(<Ng5FilesConfig>{
                     maxFileSize: 2222,
                     totalFilesSize: 1111
                 });
@@ -169,7 +169,7 @@ describe('Ng4FilesService', () => {
             });
 
             it('should return this', () => {
-                const reulst = (sut as any).isAcceptExtensionsValid(<Ng4FilesConfig>{});
+                const reulst = (sut as any).isAcceptExtensionsValid(<Ng5FilesConfig>{});
 
                 expect(reulst).toBe(sut);
             });
@@ -179,7 +179,7 @@ describe('Ng4FilesService', () => {
         describe('transformAcceptExtensions', () => {
 
             it('should map extensions from * to */*', () => {
-                const mockPipeConfig = <Ng4FilesConfig>{acceptExtensions: '*'};
+                const mockPipeConfig = <Ng5FilesConfig>{acceptExtensions: '*'};
 
                 (sut as any).transformAcceptExtensions(mockPipeConfig);
 
@@ -187,7 +187,7 @@ describe('Ng4FilesService', () => {
             });
 
             it('should map extensions to */* if * present in extensions array', () => {
-                const mockPipeConfig = <Ng4FilesConfig>{acceptExtensions: ['exe', '*', 'com']};
+                const mockPipeConfig = <Ng5FilesConfig>{acceptExtensions: ['exe', '*', 'com']};
 
                 (sut as any).transformAcceptExtensions(mockPipeConfig);
 
@@ -195,7 +195,7 @@ describe('Ng4FilesService', () => {
             });
 
             it('should map extensions to */* if extensions array is empty', () => {
-                const mockPipeConfig = <Ng4FilesConfig>{acceptExtensions: []};
+                const mockPipeConfig = <Ng5FilesConfig>{acceptExtensions: []};
 
                 (sut as any).transformAcceptExtensions(mockPipeConfig);
 
@@ -203,7 +203,7 @@ describe('Ng4FilesService', () => {
             });
 
             it('should return this', () => {
-                const reulst = (sut as any).transformAcceptExtensions(<Ng4FilesConfig>{acceptExtensions: '*'});
+                const reulst = (sut as any).transformAcceptExtensions(<Ng5FilesConfig>{acceptExtensions: '*'});
 
                 expect(reulst).toBe(sut);
             });
